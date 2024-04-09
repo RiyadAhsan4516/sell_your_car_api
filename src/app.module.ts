@@ -1,12 +1,12 @@
-import { Module } from '@nestjs/common';
+import { Module } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsersModule } from './users/users.module';
-import { ReportsModule } from './reports/reports.module';
+import { AppController } from "./app.controller";
+import { AppService } from "./app.service";
+import { UsersModule } from "./users/users.module";
+import { ReportsModule } from "./reports/reports.module";
 import { User } from "./users/user.entity";
 import { Reports } from "./reports/reports.entity";
-import { PasswordEncryptionSubscriber } from "./helpers/passwordEncryptionSubscriber";
+
 
 let entities: any[] = [User, Reports]
 
@@ -17,7 +17,7 @@ let entities: any[] = [User, Reports]
       database: 'db.sqlite.db',
       entities,
       synchronize: true,
-      subscribers: [PasswordEncryptionSubscriber]
+      // subscribers: [PasswordEncryptionSubscriber]
     }),
     UsersModule,
     ReportsModule

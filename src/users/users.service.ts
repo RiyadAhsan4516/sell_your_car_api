@@ -6,7 +6,7 @@ import { User } from "./user.entity";
 export class UsersService {
   constructor(private usersRepo : UsersRepository) {}
 
-  async create(email: string, password: string): Promise<void>{
+  async create(email: string, password: string): Promise<{ [key: string] : string }>{
     return await this.usersRepo.create(email, password);
   }
 

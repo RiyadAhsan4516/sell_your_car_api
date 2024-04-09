@@ -4,10 +4,14 @@ import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { Serialize } from "../interceptors/serialize.interceptor";
 import { UserDto } from "./dto/user.dto";
+import { AuthService } from "./auth.service";
 
 @Controller("users")
 export class UsersController {
-  constructor(private userService: UsersService) {}
+  constructor(
+    private userService: UsersService,
+    private authService : AuthService
+  ) {}
 
   @Get("/get_users")
   async getUsers(@Query('email') email : string, @Req() req : any){
@@ -23,9 +27,13 @@ export class UsersController {
   }
 
   @Post("/signup")
-  async createUser(@Body() body: CreateUserDto) {
-    await this.userService.create(body.email, body.password);
-    return await this.userService.getMany();
+  async createUser(@Body() body: CreateUserDto): Promise<{[key: string] : string}> {
+    return await this.authService.signUp(body.email, body.password)
+  }
+
+  @Post("/sign_in")
+  async signIn(@Body() body: CreateUserDto): Promise<{[key: string] : string}> {
+    return await this.authService.signIn(body.email, body.password)
   }
 
   @Put("/update_info/:id")

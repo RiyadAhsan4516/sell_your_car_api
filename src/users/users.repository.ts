@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { Repository, SelectQueryBuilder } from "typeorm";
+import { InsertResult, Repository, SelectQueryBuilder } from "typeorm";
 import { User } from "./user.entity";
 import { InjectRepository } from "@nestjs/typeorm";
 
@@ -9,12 +9,14 @@ export class UsersRepository {
   constructor(@InjectRepository(User) private repo: Repository<User>) {
   }
 
-  async create(email: string, password: string) {
-    await this.repo.createQueryBuilder()
+  async create(email: string, password: string) : Promise<{[key: string] : string}>{
+     await this.repo.createQueryBuilder()
       .insert()
       .into(User)
       .values({ email, password })
       .execute();
+
+    return {message : "New User created"}
   }
 
   async getMany(email : string | null = null) {
