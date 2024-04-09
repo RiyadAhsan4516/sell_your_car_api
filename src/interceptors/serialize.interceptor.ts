@@ -9,6 +9,7 @@ interface ClassConstructor{
 
 // THIS IS OUR OWN CUSTOM DECORATOR
 export function Serialize(dto: ClassConstructor){
+  // When returning another decorator, do not use '@'
   return UseInterceptors(new SerializeInterceptor(dto))
 }
 
