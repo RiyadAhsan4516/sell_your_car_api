@@ -6,6 +6,8 @@ interface ClassConstructor{
   // THIS INTERFACE DENOTES ANY KIND OF CLASS
   new (...args : any[]) : {}
 }
+
+// THIS IS OUR OWN CUSTOM DECORATOR
 export function Serialize(dto: ClassConstructor){
   return UseInterceptors(new SerializeInterceptor(dto))
 }
