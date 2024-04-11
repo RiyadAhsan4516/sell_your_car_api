@@ -20,6 +20,7 @@ export class SerializeInterceptor implements NestInterceptor {
     // DO SOMETHING HERE BEFORE A REQUEST IS HANDLED
     return next.handle().pipe(
       // DO SOMETHING HERE BEFORE THE RESPONSE IS SENT OUT
+      // IF GUARD IS PLACED THEN WE CAN CHECK THE ROLE AND FILTER OUT THE DTO AS WELL
       map((data: any)=>{
         return plainToInstance(this.dto, data, {
           excludeExtraneousValues : true
