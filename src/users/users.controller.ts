@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req } from "@nestjs/common";
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, Req, UseGuards } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { Serialize } from "../interceptors/serialize.interceptor";
 import { UserDto } from "./dto/user.dto";
 import { AuthService } from "./auth.service";
+import { AuthGuard } from "../guards/auth.guard";
 
 @Controller("users")
 export class UsersController {
@@ -13,9 +14,10 @@ export class UsersController {
     private authService : AuthService
   ) {}
 
+  @UseGuards(AuthGuard)
   @Get("/get_users")
   async getUsers(@Query('email') email : string, @Req() req : any){
-    console.log(req.query);
+    console.log("user object =>", req.user);
     return await this.userService.getMany(email)
   }
 
