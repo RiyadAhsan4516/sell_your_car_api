@@ -1,7 +1,7 @@
-import { Test, TestingModule, TestingModuleBuilder } from "@nestjs/testing";
-import { AuthService } from "./auth.service";
-import { UsersService } from "./users.service";
-import { User } from "./user.entity";
+import {Test, TestingModule} from "@nestjs/testing";
+import {AuthService} from "./auth.service";
+import {UsersService} from "./users.service";
+import {User} from "./user.entity";
 
 describe("AuthService", () => {
   let service: AuthService;
@@ -26,7 +26,7 @@ describe("AuthService", () => {
       ]
     }).compile();
 
-    service = module.get<AuthService>(AuthService);
+    service = (module.get<AuthService>(AuthService)) as AuthService;
   });
 
 
