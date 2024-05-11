@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     let authHeader = req.headers['authorization']
     req.user = {id: 24}
     // WE CAN CONDUCT OUR OWN CUSTOMIZED AUTHENTICATION HERE
-    console.log("formatted request object =>", authHeader);
+    // console.log("formatted request object =>", authHeader);
     return true;
   }
 }

@@ -12,7 +12,7 @@ export class AuthService {
   }
 
   async signUp(email: string, password: string): Promise<{[key: string] : string}> {
-    let user = await this.usersService.getMany(email);
+    let user : User[] = await this.usersService.getMany(email);
     if (user.length > 0) throw new BadRequestException("A user already exists with this id");
 
     // GENERATE A SALT

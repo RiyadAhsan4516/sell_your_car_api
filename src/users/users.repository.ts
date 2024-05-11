@@ -19,7 +19,7 @@ export class UsersRepository {
     return {message : "New User created"}
   }
 
-  async getMany(email : string | null = null) {
+  async getMany(email : string | null = null): Promise<User[]>  {
     let query: SelectQueryBuilder<User> = this.repo.createQueryBuilder()
     if(email) query = await this.addQuery(email, query)
     return query.maxExecutionTime(1000).getMany()
